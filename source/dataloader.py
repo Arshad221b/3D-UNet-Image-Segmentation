@@ -2,7 +2,7 @@ import nibabel as nib
 import numpy as np
 import torch
 from torch.utils import data
-
+import torch.nn.functional as F
 from config.model_config import Device_config, Image_config, Model_config
 
 
