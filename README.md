@@ -13,7 +13,8 @@ Inside cofig following are the hyperparameters,
 * OUTPUT_CHANNEL : no of output channels ie no of segments
 
 ## Loss function 
-`def dice_loss(input_im, target):
+`
+def dice_loss(input_im, target):
         smooth          = 1.0
         iflat           = input_im.flatten()
         tflat           = target.flatten()
