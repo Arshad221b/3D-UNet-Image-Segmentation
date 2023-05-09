@@ -1,4 +1,5 @@
 # 3D Medical Image Segmentation 
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 This is a project that segments 3D MRI/CT scan images into various 15 organs. The main architecture behind this is custom 3D UNet which is based on 2D UNet(2015). Reference papers are included in the Papers folder.
 
