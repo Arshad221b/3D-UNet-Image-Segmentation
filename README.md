@@ -13,16 +13,16 @@ Inside cofig following are the hyperparameters,
 * OUTPUT_CHANNEL : no of output channels ie no of segments
 
 ## Loss function 
-`
-def dice_loss(input_im, target):
-        smooth          = 1.0
-        iflat           = input_im.flatten()
-        tflat           = target.flatten()
-        intersection    = (iflat * tflat).sum()
+```python
+        def dice_loss(input_im, target):
+                smooth          = 1.0
+                iflat           = input_im.flatten()
+                tflat           = target.flatten()
+                intersection    = (iflat * tflat).sum()
 
-        return 1 - ((2. * intersection + smooth) /
-                (iflat.sum() + tflat.sum() + smooth))
-`
+                return 1 - ((2. * intersection + smooth) /
+                        (iflat.sum() + tflat.sum() + smooth))
+```
 
 ## Other approaches 
 The main model is trained using the image patches, however other approaches can be build using interpolation techniques (not recommended). Other approaches can be found in the notebooks. 
