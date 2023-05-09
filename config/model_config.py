@@ -13,11 +13,11 @@ Image_config = {
 }
 
 Model_config = {
-    'BATCH_SIZE' : 2,
+    'BATCH_SIZE' : 1,
     'NUM_CLASS' : 15,
-    'INPUT_DIM' : 3,
-    'OUTPUT_CHANNEL': 82,
-    'EPOCHS' : 2
+    'INPUT_DIM' : 1,
+    'OUTPUT_CHANNEL': 15,
+    'EPOCHS' : 100
 }
 
 PATHS = {
