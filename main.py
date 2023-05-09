@@ -6,12 +6,14 @@ from config.model_config import Device_config, Image_config, Model_config
 from source.dataloader import AmosDataLoader
 from source.model import UNet3D
 from source.train import train_model, validate_model
-
+from config.model_config import PATHS
 
 class Run_Segmentation():
-    def __init__(self, input_paths, target_paths) -> None:
+    def __init__(self, input_paths, target_paths, input_paths_validation, target_paths_validation) -> None:
         self.input_paths = input_paths
         self.target_paths = target_paths
+        self.input_paths_validation = input_paths_validation
+        self.target_paths_validation = target_paths_validation
         self.batch_size = Model_config['BATCH_SIZE']
         self.num_class = Model_config['NUM_CLASS']
         self.input_chan = Model_config['INPUT_DIM']
@@ -32,18 +34,25 @@ class Run_Segmentation():
         train = train_model(model, optimizer, criteria, n_epoch, train_loader)
         train.train_model()
 
+    def run_validation(self):
+        model = UNet3D(self.input_chan, self.num_class).to(self.device)
+        data  = AmosDataLoader(self.input_paths_validation, self.target_paths_validation)
+        validation = validate_model(data, model)
+        
 
-import os
-from glob import glob
-
-path = '/Users/arshad_221b/Downloads/Projects/create_shorts-main/MedSeg/AMOS/amos22/'
 
 
-input_paths   = sorted(glob(os.path.join(path, "imagesVa","*.nii.gz")))
-target_paths  = sorted(glob(os.path.join(path, "labelsVa","*.nii.gz")))
+# import os
+# from glob import glob
 
-r = Run_Segmentation(input_paths, target_paths)
-r.run_train_model()
+# path = '/Users/arshad_221b/Downloads/Projects/create_shorts-main/MedSeg/AMOS/amos22/'
+
+
+# input_paths   = sorted(glob(os.path.join(path, "imagesVa","*.nii.gz")))
+# target_paths  = sorted(glob(os.path.join(path, "labelsVa","*.nii.gz")))
+
+# r = Run_Segmentation(input_paths, target_paths)
+# r.run_train_model()
 
 
         

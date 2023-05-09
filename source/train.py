@@ -1,6 +1,8 @@
 import torch
-from config.model_config import Device_config, Image_config
+from config.model_config import Device_config, Image_config, PATHS
 import torch.nn.functional as F
+from source.model import UNet3D
+
 
 class train_model():
     def __init__(self, model, optimizer, criteria, epochs, train_loader, valid_loader= None) -> None:
@@ -12,6 +14,8 @@ class train_model():
         self.valid_loader = valid_loader
         self.patch_size   = Image_config['BATCH_PATH_SIZE']
         self.device       = Device_config['device']
+        self.save_path    = PATHS['model_save']
+        self.load_path    = PATHS['model_load']
 
     def dice_loss(self, input_im, target):
         smooth          = 1.0
@@ -53,7 +57,7 @@ class train_model():
             'state_dict': model.state_dict(),
             'optimizer': self.optimizer.state_dict(),
         }
-        savepath="checkpoint_{}.t7".format(str(epoch))
+        savepath= self.save_path + "checkpoint_{}.t7".format(str(epoch))
         torch.save(state,savepath)
     
         
@@ -74,11 +78,14 @@ class train_model():
 
 
 class validate_model():
-    def __init__(self, model, criteria) -> None:
-        self.model    = model
-        self.criteria = criteria
+    def __init__(self, data,model) -> None:
+        self.model = model
+        self.data = data
 
     def validate_batch(self):
+        checkpoint = torch.load(self.load_path)
+        self.model.load_state_dict(checkpoint['state_dict'])
+        self.model.eval()
         self.model.eval()
         ims_in, ims_out   = self.data
         pred_img          = self.model(ims_in)

@@ -19,3 +19,10 @@ Model_config = {
     'OUTPUT_CHANNEL': 82,
     'EPOCHS' : 2
 }
+
+PATHS = {
+    'dataset' : '/Users/arshad_221b/Downloads/Projects/create_shorts-main/MedSeg/AMOS/amos22/',
+    'model_save' : '/',
+    'model_load' : '/'
+    
+}
