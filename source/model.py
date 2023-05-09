@@ -40,7 +40,9 @@ class Up3D(nn.Module):
         self.conv = DoubleConv3D(in_channels, out_channels)
 
     def forward(self, x1, x2):
+        # print(x1.shape, x2.shape)
         x1    = self.up(x1)
+        # print(x1.shape)
         diffZ = x2.size()[2] - x1.size()[2]
         diffY = x2.size()[3] - x1.size()[3]
         diffX = x2.size()[4] - x1.size()[4]
@@ -89,4 +91,3 @@ class UNet3D(nn.Module):
         output= self.outconv(x9)
 
         return output
-

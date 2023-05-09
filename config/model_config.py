@@ -8,7 +8,8 @@ Device_config = {
 
 
 Image_config = {
-    'IMAGE_SIZE': 32,
+    'IMAGE_SIZE': 64,
+    'PATCH_BATCH_SIZE': 8 
 }
 
 Model_config = {
